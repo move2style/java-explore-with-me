@@ -6,9 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.yandex.practicum.dto.EndpointHitDto;
-import ru.yandex.practicum.dto.ViewStatsDto;
-import ru.yandex.practicum.service.StatsService;
+import ru.practicum.dto.EndpointHitDto;
+import ru.practicum.dto.ViewStatsDto;
+import ru.practicum.service.StatsService;
 
 import java.net.URI;
 import java.time.LocalDateTime;
