@@ -24,7 +24,7 @@ public class StatsClient {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final RestClient restClient;
 
-    public StatsClient(@Value("${stats-service.url:http://localhost:9090}") String serverUrl) {
+    public StatsClient(@Value("${STATS_SERVER_URL:http://stats-server:9090}") String serverUrl) {
         this.restClient = RestClient.builder()
                 .baseUrl(serverUrl)
                 .build();
@@ -38,6 +38,7 @@ public class StatsClient {
                     .body(hitDto))
                     .toBodilessEntity();
         } catch (RestClientException e) {
+            log.error("Не удалось отправить хит в StatsService", e);
             throw new StatsClientException("Не удалось отправить хит в StatsService", e);
         }
     }
@@ -63,6 +64,7 @@ public class StatsClient {
                     .body(new org.springframework.core.ParameterizedTypeReference<List<ViewStatsDto>>() {
                     });
         } catch (RestClientException e) {
+            log.error("Не удалось получить статистику из StatsService", e);
             throw new StatsClientException("Не удалось получить статистику из StatsService", e);
         }
     }
