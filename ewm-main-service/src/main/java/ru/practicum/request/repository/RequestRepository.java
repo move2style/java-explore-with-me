@@ -37,14 +37,12 @@ public interface RequestRepository extends JpaRepository<Request, Long>, JpaSpec
             """)
     List<Request> findByEventIdAndIdInWithRelations(@Param("eventId") Long eventId, @Param("requestIds") List<Long> requestIds);
 
-    @Query("""
-            SELECT new ru.yandex.practicum.request.dto.ConfirmedRequestCount(e.id, COUNT(r))
-            FROM Request r
-            JOIN r.event e
-            WHERE r.status = :status
-                AND e.id IN :eventIds
-            GROUP BY e.id
-            """)
+    @Query("SELECT new ru.practicum.request.dto.ConfirmedRequestCount(e.id, COUNT(r)) " +
+            "FROM Request r " +
+            "JOIN r.event e " +
+            "WHERE r.status = :status " +
+            "AND e.id IN :eventIds " +
+            "GROUP BY e.id")
     List<ConfirmedRequestCount> countConfirmedRequestsForEvents(@Param("eventIds") List<Long> eventIds,
                                                                 @Param("status") RequestStatus status);
 
