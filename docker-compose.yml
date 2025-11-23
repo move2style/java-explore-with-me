@@ -6,12 +6,13 @@ services:
       - POSTGRES_DB=statsdb
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=12345
-    volumes:
-      - ./volumes/stats-db:/var/lib/postgresql/data
+    # Убрал volumes для CI/CD
+    # volumes:
+    #   - ./volumes/stats-db:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d statsdb"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -44,12 +45,13 @@ services:
       - POSTGRES_DB=ewmdb
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=12345
-    volumes:
-      - ./volumes/ewm-db:/var/lib/postgresql/data
+    # Убрал volumes для CI/CD
+    # volumes:
+    #   - ./volumes/ewm-db:/var/lib/postgresql/data
     ports:
       - "5434:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d ewmdb"]
       interval: 5s
       timeout: 5s
       retries: 10
