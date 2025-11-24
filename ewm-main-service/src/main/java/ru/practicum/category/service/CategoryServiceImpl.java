@@ -39,7 +39,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void deleteCategory(Long catId) {
-        Category category = entityValidator.ensureAndGet(categoryRepository, catId, "Категория");
 
         long relatedEvents = eventRepository.countByCategoryId(catId);
         if (relatedEvents > 0) {

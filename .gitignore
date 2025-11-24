@@ -15,8 +15,117 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Database ###
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.mdf
+*.ldf
+*.ndf
+*.mdb
+*.accdb
+*.dbf
+*.ora
+*.sql
+dump.sql
+backup/
+migrations/*.sql
+db/backup/
+database/
+*.dump
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+/out/
+
+### Eclipse ###
+.classpath
+.project
+.settings/
+bin/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.externalToolBuilders/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+*.swp
+*.swo
+*~
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+### Linux ###
+*~
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Gradle ###
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### Logs ###
+logs/
+*.log
+logs.json
+
+### Environment variables ###
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### Temporary files ###
+*.tmp
+*.temp
+*.cache
+.cache/
+
+### Build directories ###
+build/
+dist/
+*.tar.gz
+*.tgz
+
+### OS generated files ###
+Icon?
+.Spotlight-V100
+.Trashes

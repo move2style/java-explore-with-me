@@ -85,13 +85,7 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public void deleteCompilation(Long compId) {
-        log.info("Удаление подборки с id: {}", compId);
-
-        // Проверяем существование перед удалением
-        entityValidator.ensureExists(compilationRepository, compId, "Подборка");
-
         compilationRepository.deleteById(compId);
-        log.info("Подборка удалена с id: {}", compId);
     }
 
     @Override
