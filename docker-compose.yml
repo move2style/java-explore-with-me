@@ -6,12 +6,13 @@ services:
       - POSTGRES_DB=statsdb
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=12345
-    volumes:
-      - ./volumes/stats-db:/var/lib/postgresql/data
+    # Убрал volumes для CI/CD
+    # volumes:
+    #   - ./volumes/stats-db:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d statsdb"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -31,6 +32,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/statsdb
       - SPRING_DATASOURCE_USERNAME=dbuser
       - SPRING_DATASOURCE_PASSWORD=12345
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9090/actuator/health || exit 1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   ewm-db:
     image: postgres:16.1
@@ -39,12 +45,13 @@ services:
       - POSTGRES_DB=ewmdb
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=12345
-    volumes:
-      - ./volumes/ewm-db:/var/lib/postgresql/data
+    # Убрал volumes для CI/CD
+    # volumes:
+    #   - ./volumes/ewm-db:/var/lib/postgresql/data
     ports:
       - "5434:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d ewmdb"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -59,7 +66,7 @@ services:
       - "8080:8080"
     depends_on:
       stats-server:
-        condition: service_started
+        condition: service_healthy
       ewm-db:
         condition: service_healthy
     environment:
